@@ -48,7 +48,7 @@ namespace OpenTracing.BasicTracer
             return span;
         }
 
-        public void Inject<TCarrier>(ISpanContext spanContext, Format<TCarrier> format, TCarrier carrier)
+        public void Inject<TCarrier>(ISpanContext spanContext, IFormat<TCarrier> format, TCarrier carrier)
         {
             // TODO add other formats (and maybe don't use if/else :D )
 
@@ -64,7 +64,7 @@ namespace OpenTracing.BasicTracer
             }
         }
 
-        public ISpanContext Extract<TCarrier>(Format<TCarrier> format, TCarrier carrier)
+        public ISpanContext Extract<TCarrier>(IFormat<TCarrier> format, TCarrier carrier)
         {
             // TODO add other formats (and maybe don't use if/else :D )
 
