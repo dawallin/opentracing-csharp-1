@@ -16,10 +16,12 @@ namespace OpenTracing.NullTracer
         }
 
         public void Inject<TCarrier>(ISpanContext spanContext, IFormat<TCarrier> format, TCarrier carrier)
+            where TCarrier : IInjectCarrier
         {
         }
 
         public ISpanContext Extract<TCarrier>(IFormat<TCarrier> format, TCarrier carrier)
+            where TCarrier : IExtractCarrier
         {
             return null;
         }

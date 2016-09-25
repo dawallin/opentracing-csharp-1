@@ -5,12 +5,12 @@ using System.Net.Http.Headers;
 namespace OpenTracing.Propagation
 {
     /// <summary>
-    /// A <see cref="ITextMap"/> which allows <see cref="HttpHeaders"/> implementations to be used as carrier objects.
+    /// A <see cref="ITextMapInjectCarrier"/> and <see cref="ITextMapExtractCarrier"/>  which allows <see cref="HttpHeaders"/> implementations to be used as carrier objects.
     /// </summary>
     /// <remarks>
     /// <see cref="HttpHeaders"/> is a multi-value dictionary. Since most other platforms represent http headers as regular
     /// dictionaries, this carrier represents it as a regular dictionary to tracer implementations.</remarks>
-    public class SystemNetHttpHeadersCarrier : ITextMap
+    public class SystemNetHttpHeadersCarrier : ITextMapInjectCarrier, ITextMapExtractCarrier
     {
         private readonly HttpHeaders _headers;
 

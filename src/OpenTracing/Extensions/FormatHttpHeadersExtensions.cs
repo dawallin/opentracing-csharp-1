@@ -62,7 +62,7 @@ namespace OpenTracing
                 throw new ArgumentNullException(nameof(tracer));
             }
 
-            tracer.Inject(spanContext, Formats.HttpHeaders, new SystemNetHttpHeadersCarrier(headers));
+            tracer.Inject<IInjectCarrier>(spanContext, Formats.HttpHeaders, new SystemNetHttpHeadersCarrier(headers));
         }
 
         /// <summary>
@@ -79,7 +79,7 @@ namespace OpenTracing
                 throw new ArgumentNullException(nameof(tracer));
             }
 
-            tracer.Inject(spanContext, Formats.HttpHeaders, new DictionaryCarrier(headers));
+            tracer.Inject<IInjectCarrier>(spanContext, Formats.HttpHeaders, new DictionaryCarrier(headers));
         }
 
         /// <summary>
@@ -106,7 +106,7 @@ namespace OpenTracing
                 throw new ArgumentNullException(nameof(tracer));
             }
 
-            return tracer.Extract(Formats.HttpHeaders, new SystemNetHttpHeadersCarrier(headers));
+            return tracer.Extract<IExtractCarrier>(Formats.HttpHeaders, new SystemNetHttpHeadersCarrier(headers));
         }
 
         /// <summary>
@@ -122,7 +122,7 @@ namespace OpenTracing
                 throw new ArgumentNullException(nameof(tracer));
             }
 
-            return tracer.Extract(Formats.HttpHeaders, new DictionaryCarrier(headers));
+            return tracer.Extract<IExtractCarrier>(Formats.HttpHeaders, new DictionaryCarrier(headers));
         }
     }
 }

@@ -18,6 +18,7 @@ namespace OpenTracing
         /// <param name="format">The format which should be used.</param>
         /// <param name="carrier">See the documentation for the chosen <paramref name="format"/> for a description of the carrier object.</param>
         void Inject<TCarrier>(ISpanContext spanContext, IFormat<TCarrier> format, TCarrier carrier)
+            where TCarrier : IInjectCarrier;
 
         /// <summary>
         /// Returns a new <see cref="ISpanContext"/> containing the baggage of the given <paramref name="carrier"/>,
@@ -26,5 +27,6 @@ namespace OpenTracing
         /// <param name="format">The format which should be used.</param>
         /// <param name="carrier">See the documentation for the chosen <paramref name="format"/> for a description of the carrier object</param>
         ISpanContext Extract<TCarrier>(IFormat<TCarrier> format, TCarrier carrier)
+            where TCarrier : IExtractCarrier;
     }
 }

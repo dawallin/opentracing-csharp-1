@@ -49,6 +49,7 @@ namespace OpenTracing.BasicTracer
         }
 
         public void Inject<TCarrier>(ISpanContext spanContext, IFormat<TCarrier> format, TCarrier carrier)
+                where TCarrier : IInjectCarrier
         {
             // TODO add other formats (and maybe don't use if/else :D )
 
@@ -56,7 +57,7 @@ namespace OpenTracing.BasicTracer
 
             if (format.Equals(Formats.TextMap))
             {
-                _textMapCarrierHandler.MapContextToCarrier(typedContext, (ITextMap) carrier);
+                _textMapCarrierHandler.MapContextToCarrier(typedContext, (ITextMapInjectCarrier) carrier);
             }
             else
             {
@@ -65,12 +66,13 @@ namespace OpenTracing.BasicTracer
         }
 
         public ISpanContext Extract<TCarrier>(IFormat<TCarrier> format, TCarrier carrier)
+            where TCarrier : IExtractCarrier
         {
             // TODO add other formats (and maybe don't use if/else :D )
 
             if (format.Equals(Formats.TextMap))
             {
-                return _textMapCarrierHandler.MapCarrierToContext((ITextMap) carrier);
+                return _textMapCarrierHandler.MapCarrierToContext((ITextMapExtractCarrier) carrier);
             }
             
             throw new UnsupportedFormatException($"The format '{format}' is not supported.");

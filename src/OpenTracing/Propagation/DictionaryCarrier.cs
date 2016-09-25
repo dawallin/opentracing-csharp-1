@@ -4,9 +4,9 @@ using System.Collections.Generic;
 namespace OpenTracing.Propagation
 {
     /// <summary>
-    /// The default <see cref="ITextMap"/> implementation which wraps an arbitrary <see cref="IDictionary{TKey,TValue}"/>.
+    /// The default <see cref="ITextMapInjectCarrier"/> and <see cref="ITextMapExtractCarrier"/> implementation which wraps an arbitrary <see cref="IDictionary{TKey,TValue}"/>.
     /// </summary>
-    public class DictionaryCarrier : ITextMap
+    public class DictionaryCarrier : ITextMapInjectCarrier, ITextMapExtractCarrier
     {
         private readonly IDictionary<string, string> _payload;
 
