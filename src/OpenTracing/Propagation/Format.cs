@@ -6,7 +6,7 @@ namespace OpenTracing.Propagation
     /// Format instances control the behavior of <see cref="ITracer.Inject" /> and <see cref="ITracer.Extract" /> 
     /// (and also constrain the type of the carrier parameter to same).
     /// </summary>
-    public struct Format<TCarrier>: IFormat<TCarrier>
+    public struct Format<TInjectCarrier, TExtractCarrier> : IFormat<TInjectCarrier, TExtractCarrier>
     {
         /// <summary>
         /// The unique name for this format.

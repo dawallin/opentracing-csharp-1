@@ -36,7 +36,7 @@ namespace OpenTracing
                 throw new ArgumentNullException(nameof(tracer));
             }
 
-            tracer.Inject<ITextMapInjectCarrier>(spanContext, Formats.TextMap, new DictionaryCarrier(data));
+            tracer.Inject(spanContext, Formats.TextMap, new DictionaryCarrier(data));
         }
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace OpenTracing
                 throw new ArgumentNullException(nameof(tracer));
             }
 
-            return tracer.Extract<ITextMapExtractCarrier>(Formats.TextMap, new DictionaryCarrier(data));
+            return tracer.Extract(Formats.TextMap, new DictionaryCarrier(data));
         }
     }
 }

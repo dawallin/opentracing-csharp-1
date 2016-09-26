@@ -47,9 +47,8 @@ namespace OpenTracing.BasicTracer
 
             return span;
         }
-
-        public void Inject<TCarrier>(ISpanContext spanContext, IFormat<TCarrier> format, TCarrier carrier)
-                where TCarrier : IInjectCarrier
+        
+        public void Inject<IInjectCarrier, IExtractCarrier>(ISpanContext spanContext, IFormat<IInjectCarrier, IExtractCarrier> format, IInjectCarrier carrier)
         {
             // TODO add other formats (and maybe don't use if/else :D )
 
@@ -57,7 +56,7 @@ namespace OpenTracing.BasicTracer
 
             if (format.Equals(Formats.TextMap))
             {
-                _textMapCarrierHandler.MapContextToCarrier(typedContext, (ITextMapInjectCarrier) carrier);
+                _textMapCarrierHandler.MapContextToCarrier(typedContext, (ITextMapInjectCarrier)carrier);
             }
             else
             {
@@ -65,8 +64,7 @@ namespace OpenTracing.BasicTracer
             }
         }
 
-        public ISpanContext Extract<TCarrier>(IFormat<TCarrier> format, TCarrier carrier)
-            where TCarrier : IExtractCarrier
+        public ISpanContext Extract<IInjectCarrier, IExtractCarrier>(IFormat<IInjectCarrier, IExtractCarrier> format, IExtractCarrier carrier)
         {
             // TODO add other formats (and maybe don't use if/else :D )
 
